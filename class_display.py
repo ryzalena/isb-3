@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import (QPushButton, QMainWindow, QLabel)
 from class_encryption import Encryption
 from class_keys import Keys
 from class_decryption import Decryption
+from class_receiving import Receiving
 
 class Display(QMainWindow):
     def __init__(self) -> None:
