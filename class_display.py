@@ -1,6 +1,6 @@
 from PyQt5 import QtCore
 from PyQt5.QtGui import QFont
-from class_encoder import Encoder as enc
+from class_encoder import Working_with_files as enc
 from PyQt5.QtWidgets import (QPushButton, QMainWindow, QLabel)
 
 from class_encryption import Encryption
