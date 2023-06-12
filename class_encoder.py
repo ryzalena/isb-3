@@ -16,7 +16,7 @@ class Flag(Enum):
     file_good = 0
 
 
-class Encoder():
+class Working_with_files ():
     def __init__(self) -> None:
         self.way_to_init_text = str(QFileDialog.getOpenFileName(caption='Выберите файл для шифровки', filter='*.txt'))
         self.way_to_init_text = self.way_to_init_text.split('\'')[1]
