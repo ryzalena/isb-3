@@ -1,18 +1,15 @@
 import os
-from cryptography.hazmat.primitives import padding as sym_padding
+from cryptography.hazmat.primitives import (padding as sym_padding)
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 import logging
 from class_encoder import Flag
+import warnings
+from cryptography.utils import CryptographyDeprecationWarning
+
+warnings.filterwarnings("ignore", category=CryptographyDeprecationWarning)
 
 class Decryption():
-
-    def decryption(self) -> Flag:
-        """
-
-        Расшифровка методом CAST5.
-
-        :return: Flag, состояние программы.
-        """
+    def decryption(self) -> Flag:  # Расшифровка методом CAST5
         if (os.path.isfile(self.file_settings['encrypted_file']) == False):
             return self.flag.file_error_enc_text.value
         else:
@@ -36,7 +33,7 @@ class Decryption():
         else:
             dec_sym_key = self.receiving_decryption()
 
-        cipher = Cipher(algorithms.CAST5(dec_sym_key), modes.CBC(iv))
+        cipher = Cipher(algorithms.CAST5(dec_sym_key), modes.CBC(iv))  # дешифрование и депаддинг текста
 
         decryptor = cipher.decryptor()
         dc_text = decryptor.update(enc_text) + decryptor.finalize()

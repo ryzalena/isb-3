@@ -1,20 +1,15 @@
 import os
-from cryptography.hazmat.primitives import padding as sym_padding
+from cryptography.hazmat.primitives import (padding as sym_padding)
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 import logging
 from class_encoder import Flag
+import warnings
+from cryptography.utils import CryptographyDeprecationWarning
 
-
+warnings.filterwarnings("ignore", category=CryptographyDeprecationWarning)
 
 class Encryption():
-
-    def encryption(self) -> Flag:
-        """
-
-        Шифровка методом CAST5.
-
-        :return: Flag, состояние программы.
-        """
+    def encryption(self) -> Flag:  # Шифровка методом CAST5
         if (os.path.isfile(self.file_settings['initial_file']) == False):
             return self.flag.file_error_text.value
         else:
@@ -38,10 +33,10 @@ class Encryption():
         else:
             dec_sym_key = self.receiving_decryption()
 
-        padder = sym_padding.ANSIX923(32).padder()
+        padder = sym_padding.ANSIX923(32).padder()  # паддинг данных для работы блочного шифра
         padded_text = padder.update(bytes(text, 'UTF-8')) + padder.finalize()
 
-        cipher = Cipher(algorithms.CAST5(dec_sym_key), modes.CBC(iv))
+        cipher = Cipher(algorithms.CAST5(dec_sym_key), modes.CBC(iv))  # шифрование текста симметричным алгоритмом
         encryptor = cipher.encryptor()
         enc_text = encryptor.update(padded_text) + encryptor.finalize()
 
@@ -52,5 +47,3 @@ class Encryption():
             logging.error(f"Ошибка: В файле {self.file_settings['encrypted_file']}")
 
         return self.flag.file_good.value
-
-

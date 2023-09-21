@@ -1,16 +1,18 @@
 from PyQt5 import QtCore
 from PyQt5.QtGui import QFont
-from class_encoder import Working_with_files as enc
+from class_encoder import Encoder as enc
+from class_keys import Keys
+from class_receiving import Receiving
+from class_encryption import Encryption
+from class_decryption import Decryption
 from PyQt5.QtWidgets import (QPushButton, QMainWindow, QLabel)
 
-from class_encryption import Encryption
-from class_keys import Keys
-from class_decryption import Decryption
-from class_receiving import Receiving
+
+flag = 0
+
 
 class Display(QMainWindow):
     def __init__(self) -> None:
-        flag = 0
         super().__init__()
         self.basic_settings()
 
@@ -69,10 +71,9 @@ class Display(QMainWindow):
         self.btn_dec_txt.setStyleSheet(self.btn_StyleSheet_main)
         self.btn_dec_txt.clicked.connect(self.decryption)
 
-
     def output(self, text: str) -> None:
-        """ 
-        
+        """
+
         Вывод сообщений.
 
         """
@@ -86,7 +87,7 @@ class Display(QMainWindow):
         Вывод текста на кнопке для создания ключей.
 
         """
-        flag = self.Keys.creating_keys()
+        flag = Keys.creating_keys()
         if (flag == 0):
             self.output(
                 'Ключ шифрования создан, соответсующий файл создан.')
@@ -94,13 +95,13 @@ class Display(QMainWindow):
             self.output(
                 'Ошибка: Невозможно открыть файл.')
 
-    def encryption(self) -> None:
+    def encryption(self) -> None:  # Кнопка для шифровки
         """
 
         Вывод текста с кнопки для шифровки.
 
         """
-        flag = self.Encryption.encryption()
+        flag = Encryption.encryption()
         if (flag == 0):
             self.output(
                 'Текст зашифрован, соответсвующий файл создан.')
@@ -111,7 +112,7 @@ class Display(QMainWindow):
             self.output('Ошибка: Невозможно открыть файл с ключами')
         elif (flag == 4):
             self.output(
-                'Ошибка: Невозможно открыть файлу с инициализационным вектором')
+                'Ошибка: Невозможно открыть файл с инициализационным вектором')
 
     def decryption(self) -> None:
         """
@@ -119,7 +120,7 @@ class Display(QMainWindow):
         Вывод текста на кнопке для расшифроки.
 
         """
-        flag = self.Decryption.decryption()
+        flag = Decryption.decryption()
         if (flag == 0):
             self.output(
                 'Текст расшифрован и записан в файл.')
@@ -128,6 +129,6 @@ class Display(QMainWindow):
                 'Ошибка: Невозможно открыть файл с зашифрованным текстом')
         elif (flag == 3):
             self.output('Ошибка: Невозможно открыть файл с ключами')
-        elif (flag == 4):
+        elif (flag == 3):
             self.output(
-                'Ошибка: Невозможно открыть файл с инициализационным вектором')
+                'Ошибка: Невозможно открыть файл с вектором шифрования')

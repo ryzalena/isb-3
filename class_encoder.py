@@ -4,7 +4,6 @@ from enum import Enum
 import warnings
 from cryptography.utils import CryptographyDeprecationWarning
 
-
 warnings.filterwarnings("ignore", category=CryptographyDeprecationWarning)
 
 
@@ -16,8 +15,8 @@ class Flag(Enum):
     file_good = 0
 
 
-class Working_with_files ():
-    def __init__(self) -> None:
+class Encoder():
+    def __init__(self) -> None:  # Запуск программы
         self.way_to_init_text = str(QFileDialog.getOpenFileName(caption='Выберите файл для шифровки', filter='*.txt'))
         self.way_to_init_text = self.way_to_init_text.split('\'')[1]
         self.way = str(QFileDialog.getExistingDirectory(caption='Выберите папку для сохранения'))
@@ -32,3 +31,4 @@ class Working_with_files ():
             'encrypted_vector': os.path.join(self.way, 'encrypted_vector.txt')
         }
 
+        self.keys = [i for i in range(5, 17, 1)]
