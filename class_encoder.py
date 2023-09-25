@@ -17,9 +17,9 @@ class Flag(Enum):
 
 class Encoder():
     def __init__(self) -> None:  # Запуск программы
-        self.way_to_init_text = str(QFileDialog.getOpenFileName(caption='Выберите файл для шифровки', filter='*.txt'))
+        self.way_to_init_text = "isb-3\initial_file.txt"
         self.way_to_init_text = self.way_to_init_text.split('\'')[1]
-        self.way = str(QFileDialog.getExistingDirectory(caption='Выберите папку для сохранения'))
+        self.way ="isb-3\files"
         self.flag = Flag
         self.file_settings = {
             'initial_file': self.way_to_init_text,
